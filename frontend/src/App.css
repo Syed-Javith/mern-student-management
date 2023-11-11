@@ -1,0 +1,77 @@
+.student-page{
+    display: flex;
+    flex-direction: row;
+}
+.profile-tab{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    padding: 0px 15px;
+    color: white;
+    background-color: #57BBB5;
+    align-items: center;
+}
+
+.profile-pic{
+    border-radius: 100%;
+    margin: 5px auto;
+}
+
+.profile-tab button{
+    width: 30%;
+    margin: 5px auto;
+    background-color: white;
+    padding: 5px;
+    border-radius: 25px;
+    outline: none;
+    border: white;
+    color: #57BBB5;
+    font-size: 1rem;
+}
+.mark-list{
+    margin: auto;
+    background-color: #57BBB5;
+    padding: 10px;
+    width: 50%;
+    border-radius: 10px;
+}
+.mark-list p{
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 1.25rem;
+}
+.mark-list-item{
+    background-color: white;
+    padding: 0 10px;
+    margin: 10px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.admin-buttons button{
+    margin-right : 5px;
+}
+
+@media screen and (max-width : 800px) {
+    .profile-tab{
+        width: 35%;
+    }
+}
+
+@media screen and (max-width : 500px) {
+    .mark-list{
+        width: auto;
+        padding: 0;
+    }
+    .mark-list p{
+        font-size: 1rem;
+    }
+    .profile-tab p{
+        font-size: 0.75rem;
+    }
+    .profile-tab button{
+        width: auto;
+    }
+}

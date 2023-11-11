@@ -1,0 +1,47 @@
+.admin-panel{
+    display: flex;
+}
+.admin-panel h1{
+    text-align: center;
+    margin: 2px auto;
+    color: #57BBB5;
+}
+.admin-panel div.admin-form{
+    margin: auto;
+    width: 40%;
+    margin-top: 1rem;
+}
+.admin-panel form{
+    padding: 10px;
+}
+.admin-panel div.form-group{
+    margin: 10px;
+    font-size: 1.25rem;
+}
+div.form-group input , div.form-group select{
+    border: 0;
+    border-bottom: 2px solid #57BBB5 ;
+    margin: 10px 0;
+    font-size: 1.25rem;
+}
+div.form-group label{
+    margin: 5px 0;
+    display: block;
+}
+input:focus , select:focus{
+    outline: none;
+}
+input.edit-input{
+    width: 45px;
+}
+
+@media screen and (max-width : 500px) {
+    .admin-panel div.admin-form{
+        width: auto;
+    padding: 0 10px;
+    font-size: 1rem;
+    }
+    div.form-group input , div.form-group select {
+        font-size: 1rem;
+    }
+}
