@@ -1,19 +1,20 @@
 const express = require('express');
 const User = require('../models/userModel');
-const jwt = require('jsonwebtoken')
+const authenticateToken = require('../middlewares/authenticateMidlleware');
+const nodemailer = require('nodemailer');
 
 const router = express.Router();
 
 
-router.use('/student',authenticateToken)
+// router.use('/student',authenticateToken)
 
 router.get('/student/:userid', async (req, res) => {
 
     const userid = req.params.userid;
 
-    await User.findOne({ _id : userid })
+    await User.findOne({ _id : userid }, { password: 0 })
         .then((result) => {
-            console.log(result);
+            // console.log(result);
             if(result){
             res.status(200).send(result)
             }else{
@@ -49,6 +50,10 @@ router.patch('/student/add/:userid', async (req, res) => {
 
     const marks = req.body.marks
 
+    const email = req.body.email
+
+    console.log(userid);
+
     console.log(marks);
 
     await User.updateOne({
@@ -60,6 +65,7 @@ router.patch('/student/add/:userid', async (req, res) => {
         })
         .then((result) => {
             console.log(result);
+            sendEmail(email)
             res.status(200).send(result);
         }).catch((err) => {
             console.log(err);
@@ -94,7 +100,7 @@ router.patch('/student/remove/:userid', async (req, res) => {
 router.patch('/student/edit/:userid', async (req, res) => {
 
     const userid = req.params.userid
-    const marks = req.body
+    const marks = req.body.marks
 
     console.log(req.body);
 
@@ -116,30 +122,31 @@ router.patch('/student/edit/:userid', async (req, res) => {
 
 })
 
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    console.log(req.headers);
-
-    if (!token) {
-        console.log('no token');
-        console.log(authHeader);
-        return res.status(401).json({
-            message: 'No token provided'
-        });
-    }
-    jwt.verify(token, 'SYED_JAVITH_R', (err, decoded) => {
-        console.log(err);
-        if (err) {
-            return res.status(403).json({
-                message: 'Invalid token',
-                error : err
-            });
+const sendEmail = async (email) => {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: '210701278@rajalakshmi.edu.in',
+          pass: 'hgeq ippg blyw cjhq'
         }
-        req.user = decoded;
-        next();
-    });
+      });
+      
+      var mailOptions = {
+        from: '210701278@rajalakshmi.edu.in',
+        to: email ,
+        subject: 'Mail from student.com',
+        text: 'Your marks have been updated please check it now!',
+      };
+      
+      await transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+
 }
+
 
 module.exports = router;

@@ -13,7 +13,7 @@ export const getStudentDetailsById = async (userid) => {
 
 try {
     const response = await axios.get(`${url}/student/${userid}`, Headers  )
-    console.log(response);
+    // console.log(response);
     // response.data?.user?.password = ''
     return response
 } catch (err) {
@@ -23,11 +23,11 @@ try {
 
 }
 
-export const addMark = async (userid,marks , token) => {
-    Headers.headers.Authorization = token
+export const addMark = async (userid,marks , token , email) => {
+    Headers.headers.Authorization = 'Bearer ' + token
     console.log(Headers);
     try {
-        const response = await axios.patch(`${url}/student/add/${userid}`,marks , Headers)
+        const response = await axios.patch(`${url}/student/add/${userid}`,{ marks , email } , Headers)
         console.log(response);
         return response;
     } catch (err) {
@@ -36,9 +36,9 @@ export const addMark = async (userid,marks , token) => {
     }
 }
 
-export const removeMark = async (userid,code) => {
+export const removeMark = async (userid,code , token , email) => {
     try {
-        const response = await axios.post(`${url}/student/remove/${userid}`,code , Headers)
+        const response = await axios.post(`${url}/student/remove/${userid}`,{ code , email} , Headers)
         console.log(response);
         return response
     } catch (err) {
@@ -47,10 +47,10 @@ export const removeMark = async (userid,code) => {
     }
 }
 
-export const editMark = async(userid , marks , token) => {
+export const editMark = async(userid , marks , token , email) => {
     Headers.headers['Authorization'] = 'Bearer ' + token
     try {
-        const response = await axios.patch(`${url}/student/edit/${userid}`,marks,Headers)
+        const response = await axios.patch(`${url}/student/edit/${userid}`,{ marks , email },Headers)
         console.log(response);
         return response
     } catch (err) {
@@ -59,7 +59,7 @@ export const editMark = async(userid , marks , token) => {
     }
 }
 
-export const getStudent = async (rollNumber , year , department ) => {
+export const getStudent = async (rollNumber , year , department ,email ) => {
 
     try {
         const response = await axios.post( `${url}/admin/getstudent/`, { rollNumber , year , department } , Headers )

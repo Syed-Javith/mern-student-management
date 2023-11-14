@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaEdit, FaTimes } from "react-icons/fa";
 import { editMark, getIndidualMark } from "../apis/actions.api";
 import Cookies from "universal-cookie";
 
-const MarkList = ({ item,  isAdmin , userid}) => {
+const MarkList = ({ item,  isAdmin , userid , email}) => {
 
   const [newMark, setNewMark] = useState(item);
   const [isEditing, setIsEditing] = useState(false);
 
   const cookies = new Cookies();
-  console.log(cookies.get('token'));
+  // console.log(cookies.get('token'));
 
   const cancelEdit = () => {
     setIsEditing(false);
@@ -24,7 +24,7 @@ const MarkList = ({ item,  isAdmin , userid}) => {
   const editMarkOfStudent = async () => {
     setIsEditing(false)
     try {
-      const response = await editMark( userid , newMark , cookies.get('token') )
+      const response = await editMark( userid , newMark , cookies.get('token') , email)
       console.log(response);
       setNewMark(newMark)
     } catch (err) {
@@ -42,21 +42,22 @@ const MarkList = ({ item,  isAdmin , userid}) => {
           type="number"
           name="newMark"
           onChange={(e) => setMarks(e)}
+          required
         />
       )}
       <p>{item.code}</p>
       {isAdmin && (
         <div className="admin-buttons">
           {!isEditing && (
-            <button onClick={() => setIsEditing(!isEditing)}>
-              <FaCheck />
+            <button style={ { borderColor : "blue" }} onClick={() => setIsEditing(!isEditing)}>
+              <FaEdit color="blue"/>
             </button>
           )}
 
-          {isEditing && <button onClick={() => cancelEdit()}> X </button>}
+          {isEditing && <button style={ { borderColor : "red" }} onClick={() => cancelEdit()}> <FaTimes color="red"/> </button>}
           {isEditing && (
-            <button onClick={() => editMarkOfStudent()}>
-              <FaCheck />
+            <button style={ { borderColor : "green" }} onClick={() => editMarkOfStudent()}>
+              <FaCheck color="green"/>
             </button>
           )}
         </div>

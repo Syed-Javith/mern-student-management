@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import MarkList from '../components/MarkList';
 import '../css/Admin.css';
 import { getStudentDetailsById } from '../apis/actions.api';
+import AdminAddForm from '../components/AdminAddForm';
+import ProfileTab from '../components/ProfileTab';
 
 const AdminControl = () => {
   const { state } = useLocation();
@@ -12,7 +14,7 @@ const AdminControl = () => {
   const fetchData = async () => {
     try {
       const response = await getStudentDetailsById(student._id);
-      console.log(response);
+      // console.log(response);
       setStudent(response.data);
 
       const updatedMarks = response.data.marks;
@@ -25,16 +27,15 @@ const AdminControl = () => {
 
   useEffect(() => {
     fetchData();
-  }, [student._id]); 
+  }); 
 
   useEffect(() => {
-    console.log(student);
-    console.log(marks);
   }, [student, marks]); 
 
   return (
     <div>
-     <h1> Welcome To Admin Panel</h1>
+     <h1 style={{ textAlign : 'center' , color : '#57BBB5' }}> Welcome To Admin Panel</h1>
+     
       <div className='mark-list'>
         <div className='mark-list-item'>
           <p>Subject</p>
@@ -43,8 +44,10 @@ const AdminControl = () => {
           <p>Edit</p>
         </div>
         {marks.map((item , i) => {
-          return <MarkList isAdmin={true} item={item} key={i} userid={student._id} />;
+          return <MarkList isAdmin={true} item={item} key={i} userid={student._id}  email={student.email} />;
         })}
+      <AdminAddForm isAdmin={true} userid={student._id} email={student.email} />
+
       </div>
     </div>
   );

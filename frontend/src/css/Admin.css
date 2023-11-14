@@ -34,7 +34,31 @@ input:focus , select:focus{
 input.edit-input{
     width: 45px;
 }
+div.admin-form-inner{
+    border: 3px solid rgba(88, 187, 180,0.7);
+    padding: 10px;
+}
+.admin-form-inner input[type='submit']{
+    background-color: #57BBB5;
+    color: white;
+    font-weight: bold;
+    border-radius: 5%;
+    padding: 10px;
+    border: 0;
 
+    &:hover{
+        background-color: rgba(87, 187, 181,0.7);
+    }
+}
+.admin-buttons button , .add-button{
+    border-radius: 100%;
+    border-width: 3px;
+    border-style: solid;
+    padding: 5px;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+}
 @media screen and (max-width : 500px) {
     .admin-panel div.admin-form{
         width: auto;
