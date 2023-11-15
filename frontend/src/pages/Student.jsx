@@ -14,7 +14,7 @@ const Student = () => {
 
   useEffect(()=>{
 
-    if(student === null || student === undefined){
+    if(student === null || student === undefined || marks === undefined || marks === null){
       navigate('/')
     }
 
@@ -29,7 +29,7 @@ const Student = () => {
         <p>Marks</p>
         <p>Code</p>
         </div>
-        {marks.map( (item,i) => {
+        {marks?.map( (item,i) => {
           return <MarkList key={i} item={item} isAdmin={student.isAdmin}/>
         } )}
       </div>

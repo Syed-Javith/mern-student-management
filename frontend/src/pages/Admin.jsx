@@ -1,14 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfileTab from '../components/ProfileTab'
 import Cookies from 'universal-cookie'
 import '../css/Admin.css'
 import AdminForm from '../components/AdminForm'
+import { useNavigate } from 'react-router-dom'
 
 const Admin = () => {
 
   const cookies = new Cookies()
   const [admin , setAdmin] = useState(cookies.get('user'))
-  
+  const navigate = useNavigate();
+  useEffect(()=>{
+
+    if(admin === null || admin === undefined){
+      navigate('/')
+    }
+
+  })
 
   return (
     <div className='admin-panel'>

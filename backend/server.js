@@ -1,11 +1,11 @@
 const express = require('express');
 const connectToDB = require('./db');
 const app = express();
-const studentRoutes = require('./routes/studentRoutes')
-const authRoutes = require('./routes/authRoutes')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const adminRoutes = require('./routes/adminRoutes');
+const studentRoutes = require('./routes/studentRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 connectToDB();
 

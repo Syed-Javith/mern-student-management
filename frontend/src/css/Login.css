@@ -33,3 +33,9 @@
 .login input[type='submit']:hover{
     box-shadow: 2px 2px 2px #fff;
 }
+
+@media (width <= 700px){
+    .login{
+        width: auto;
+    }
+}

@@ -79,6 +79,8 @@ router.patch('/student/remove/:userid', async (req, res) => {
 
     const code = req.body.code;
 
+    const email = req.body.email;
+
     await User.updateOne({
         _id: userid
     }, {
@@ -89,6 +91,7 @@ router.patch('/student/remove/:userid', async (req, res) => {
         }
     }).then((result) => {
         console.log(result);
+        send(email)
         res.status(200).send(result)
     }).catch((err) => {
         console.log(err);
@@ -101,6 +104,7 @@ router.patch('/student/edit/:userid', async (req, res) => {
 
     const userid = req.params.userid
     const marks = req.body.marks
+    const email = req.body.email
 
     console.log(req.body);
 
@@ -114,6 +118,7 @@ router.patch('/student/edit/:userid', async (req, res) => {
         })
         .then((result) => {
             console.log(result);
+            sendEmail(email)
             res.status(200).send(result)
         }).catch((err) => {
             console.log(err);
