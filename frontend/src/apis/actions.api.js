@@ -84,3 +84,15 @@ export const getIndidualMark = async (userid , subjectid , token) => {
     }
 
 }
+
+export const registerNewUser = async (user ,token) => {
+    Headers.headers['Authorization'] = 'Bearer ' + token;
+    try {
+        console.log("lll");
+        const response = await axios.post(`${url}/admin/register`,user , Headers)
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}

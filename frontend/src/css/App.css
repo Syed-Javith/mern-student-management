@@ -85,6 +85,7 @@ form.mark-list-item input.edit-input{
 @media screen and (max-width : 800px) {
     .profile-tab{
         width: 35%;
+        height: auto;
     }
     .mark-list{
         width: auto;

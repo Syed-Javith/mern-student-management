@@ -22,6 +22,7 @@ userSchema.pre('save', function (next) {
         this.year = 0 ;
 
     }
+    next();
  })
 
 const User = mongoose.model('User',userSchema)

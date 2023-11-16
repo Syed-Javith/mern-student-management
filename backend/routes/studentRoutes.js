@@ -1,12 +1,12 @@
 const express = require('express');
 const User = require('../models/userModel');
 const authenticateToken = require('../middlewares/authenticateMidlleware');
-const nodemailer = require('nodemailer');
+const sendEmail = require('../utils/Mailer');
 
 const router = express.Router();
 
 
-// router.use('/student',authenticateToken)
+router.use('/student',authenticateToken)
 
 router.get('/student/:userid', async (req, res) => {
 
@@ -65,7 +65,7 @@ router.patch('/student/add/:userid', async (req, res) => {
         })
         .then((result) => {
             console.log(result);
-            sendEmail(email)
+            sendEmail(email,"Added Marks","Your marks have been updated")
             res.status(200).send(result);
         }).catch((err) => {
             console.log(err);
@@ -91,7 +91,7 @@ router.patch('/student/remove/:userid', async (req, res) => {
         }
     }).then((result) => {
         console.log(result);
-        send(email)
+        sendEmail(email,"Marks Edited","Your marks have been updated")
         res.status(200).send(result)
     }).catch((err) => {
         console.log(err);
@@ -118,7 +118,7 @@ router.patch('/student/edit/:userid', async (req, res) => {
         })
         .then((result) => {
             console.log(result);
-            sendEmail(email)
+            sendEmail(email,"Marks Edited","Your marks have been updated")
             res.status(200).send(result)
         }).catch((err) => {
             console.log(err);
@@ -127,31 +127,6 @@ router.patch('/student/edit/:userid', async (req, res) => {
 
 })
 
-const sendEmail = async (email) => {
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: '210701278@rajalakshmi.edu.in',
-          pass: 'hgeq ippg blyw cjhq'
-        }
-      });
-      
-      var mailOptions = {
-        from: '210701278@rajalakshmi.edu.in',
-        to: email ,
-        subject: 'Mail from student.com',
-        text: 'Your marks have been updated please check it now!',
-      };
-      
-      await transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
-
-}
 
 
 module.exports = router;
