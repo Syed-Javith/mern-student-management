@@ -3,12 +3,14 @@ import Cookies from 'universal-cookie';
 import MarkList from '../components/MarkList';
 import ProfileTab from '../components/ProfileTab';
 import { useNavigate } from 'react-router-dom';
+import DataVisualization from '../components/DataVisualization';
 
 const Student = () => {
 
   const cookies = new Cookies();
   const [student , setStudent] = useState(cookies.get('user'));
   const [marks , setMarks] = useState(student?.marks);
+  const [chartVisible , setChartVisible] = useState(false)
   const navigate = useNavigate();
   
 
@@ -23,6 +25,7 @@ const Student = () => {
   return (
     <div className='student-page'>
       <ProfileTab user={student} />
+      { !chartVisible ?
       <div className='mark-list'>
       <div className='mark-list-item'>
         <p>Subject</p>
@@ -32,7 +35,9 @@ const Student = () => {
         {marks?.map( (item,i) => {
           return <MarkList key={i} item={item} isAdmin={student.isAdmin}/>
         } )}
-      </div>
+        <button className='white-bg-colored-btn' onClick={() => setChartVisible(!chartVisible)}>charts</button>
+      </div>  :
+       <div className='mark-list charts'><DataVisualization setChartVisible={setChartVisible} data={marks}/></div>  }   
     </div>
   )
 }

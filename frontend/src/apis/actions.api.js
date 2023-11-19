@@ -59,8 +59,8 @@ export const editMark = async(userid , marks , token , email) => {
     }
 }
 
-export const getStudent = async (rollNumber , year , department ,email ) => {
-
+export const getStudent = async (rollNumber , year , department ,token ) => {
+    Headers.headers['Authorization'] = 'Bearer ' + token
     try {
         const response = await axios.post( `${url}/admin/getstudent/`, { rollNumber , year , department } , Headers )
         console.log(response);

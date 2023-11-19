@@ -2,19 +2,15 @@ const express = require('express');
 const connectToDB = require('./db');
 const app = express();
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const corsMiddleware = require('./middlewares/corsMiddleware');
 const adminRoutes = require('./routes/adminRoutes');
 const studentRoutes = require('./routes/studentRoutes')
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes');
+
 
 connectToDB();
 
-app.use(cors({
-    allowedHeaders : [ 'Content-type' , 'Authorization' ],
-    credentials : true ,
-    methods : ['GET' , 'POST' , 'PUT' , 'PATCH' , "DELETE"],
-    origin : ['http://localhost:3000']
-}))
+app.use(corsMiddleware)
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(express.json())
 

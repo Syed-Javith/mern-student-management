@@ -11,10 +11,9 @@ router.post('/admin/getstudent', async (req,res)=>{
 
     console.log(req.body);
 
-    await User.findOne({ rollNumber : rollNumber , department : department , year : year })
+    await User.findOne({ rollNumber : rollNumber , department : department , year : year } , {password : 0})
     .then((result) => {
         console.log(result);
-        result.password = ''
         res.status(200).send(result);
     }).catch((err) => {
         console.log(err);

@@ -68,7 +68,7 @@ const Login = () => {
         <div className='form-group'>
           <label htmlFor="password">password </label> <input type="password" className='line' onChange={(e) => setPassword(e.target.value)} required />
         </div>
-        <input type="submit" value="Login" />
+        <input type="submit" className='white-bg-colored-btn' value="Login" />
       </form>
       {error && <p>*Invalid username or password</p>}
     </div>

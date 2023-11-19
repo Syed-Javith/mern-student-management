@@ -65,7 +65,7 @@ router.patch('/student/add/:userid', async (req, res) => {
         })
         .then((result) => {
             console.log(result);
-            sendEmail(email,"Added Marks","Your marks have been updated")
+            sendEmail(email,"Marks edited","Your marks have been updated")
             res.status(200).send(result);
         }).catch((err) => {
             console.log(err);

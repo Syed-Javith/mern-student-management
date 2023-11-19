@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { getStudent } from '../apis/actions.api';
 import { useNavigate } from 'react-router-dom';
 
-const AdminForm = () => {
+const AdminForm = ({token}) => {
 
 
-  const [rollNumber , setRollNumber] = useState('')
+  const [rollNumber , setRollNumber] = useState(0)
   const [department , setDepartment] = useState('')
   const [year , setYear] = useState(0);
   const [warningVisible , setWarningVisible] = useState(false);
@@ -18,7 +18,7 @@ const AdminForm = () => {
     setWarningVisible(false)
 
     try {
-        const response = await getStudent( rollNumber , year , department ) ;
+        const response = await getStudent( rollNumber , year , department , token) ;
         console.log(response);
         if( response?.data?._id && response.status === 200){
             navigate('/admin/panel',{ state : { student : response.data } })
@@ -39,7 +39,7 @@ const AdminForm = () => {
         <label htmlFor="rollno">
           Roll Number 
         </label>
-        <input type="text" name='rollno' onChange={(e)=> setRollNumber(e.target.value)} placeholder='enter roll number' required/>
+        <input type="number" name='rollno' onChange={(e)=> setRollNumber(parseInt(e.target.value))} placeholder='enter roll number' required/>
         </div> 
         <div className="form-group">
           
