@@ -21,6 +21,19 @@
     font-size: 1.25rem;
     text-align: center;
 }
+.google{
+    background-color: #fff;
+    font-size: 1.25rem;
+    text-align: center;
+    border: none;
+    padding: 5px;
+    margin: 10px;
+    width: 50%;
+    cursor: pointer;
+}
+.logging{
+    background-color: #fff;
+}
 @media (width <= 700px){
     .login{
         width: auto;

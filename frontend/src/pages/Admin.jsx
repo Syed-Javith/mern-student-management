@@ -5,20 +5,30 @@ import '../css/Admin.css'
 import AdminForm from '../components/AdminForm'
 import { useNavigate } from 'react-router-dom'
 import AddUserModal from '../components/AddUserModal'
-
+import axios from 'axios'
 const Admin = () => {
 
   const cookies = new Cookies()
-  const [admin , setAdmin] = useState(cookies.get('user'))
+  const [admin , setAdmin] = useState(null)
   const [adduserModal , setAddUserModal] = useState(false)
   const navigate = useNavigate();
-  useEffect(()=>{
-
-    if(admin === null || admin === undefined){
-      navigate('/')
+  const getUser = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/verify/'+cookies.get('token'))
+      console.log(res);
+      setAdmin(res.data?.result)
+      // setMarks(student?.marks)
+    } catch (error) {
+      console.log(error);
     }
+  }
+  useEffect(()=>{
+    getUser();
+    // if(admin === null || admin === undefined){
+    //   navigate('/')
+    // }
 
-  })
+  },[])
 
   return (
     <div className='admin-panel'>

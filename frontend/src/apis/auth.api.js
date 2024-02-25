@@ -12,4 +12,13 @@ export const loginUser = async (email, password) => {
       throw err; 
     }
   }
-  
+
+export const signInWithGoogle = async () => {
+  try {
+    const response = axios.get(`${url}/profile`,{ withCredentials : true })
+    console.log(response);
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+} 

@@ -4,23 +4,34 @@ import MarkList from '../components/MarkList';
 import ProfileTab from '../components/ProfileTab';
 import { useNavigate } from 'react-router-dom';
 import DataVisualization from '../components/DataVisualization';
+import axios from 'axios';
 
 const Student = () => {
 
   const cookies = new Cookies();
-  const [student , setStudent] = useState(cookies.get('user'));
+  const [student , setStudent] = useState(null);
   const [marks , setMarks] = useState(student?.marks);
   const [chartVisible , setChartVisible] = useState(false)
   const navigate = useNavigate();
   
+  const getUser = async () => {
+    try {
+      const res = await axios.get('http://localhost:5000/verify/'+cookies.get('token'))
+      console.log(res);
+      setStudent(res.data?.result)
+      setMarks(student?.marks)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(()=>{
-
-    if(student === null || student === undefined || marks === undefined || marks === null){
-      navigate('/')
-    }
-
-  })
+    getUser();
+    if(student?.isAdmin) navigate('/admin')
+    // if(student === null || student === undefined || marks === undefined || marks === null){
+    //   navigate('/')
+    // } 
+  },[])
 
   return (
     <div className='student-page'>
