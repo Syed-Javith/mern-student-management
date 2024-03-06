@@ -102,8 +102,9 @@ const Login = () => {
         </div>
         { logging ? <img src={require('../assets/images/load.gif')} height={20} width={20} /> : <input type="submit" className='white-bg-colored-btn' value="Login" /> }
       </form>
+      {/* 
       <a onClick={google} ><button className='google'><img src={require('../assets/images/google.png')} alt="" height={20} width={20} /> Continue with Google</button></a>
-      {/* <button onClick={google}>Google</button> */}
+      <button onClick={google}>Google</button> */}
       {error && <p>*Invalid username or password</p>}
     </div>
   )
