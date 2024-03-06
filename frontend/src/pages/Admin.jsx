@@ -6,6 +6,7 @@ import AdminForm from '../components/AdminForm'
 import { useNavigate } from 'react-router-dom'
 import AddUserModal from '../components/AddUserModal'
 import axios from 'axios'
+import { BASE_URL } from '../assets/url'
 const Admin = () => {
 
   const cookies = new Cookies()
@@ -14,7 +15,7 @@ const Admin = () => {
   const navigate = useNavigate();
   const getUser = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/verify/'+cookies.get('token'))
+      const res = await axios.get( BASE_URL + '/verify/'+cookies.get('token'))
       console.log(res);
       setAdmin(res.data?.result)
       // setMarks(student?.marks)

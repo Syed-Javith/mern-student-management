@@ -5,6 +5,7 @@ import ProfileTab from '../components/ProfileTab';
 import { useNavigate } from 'react-router-dom';
 import DataVisualization from '../components/DataVisualization';
 import axios from 'axios';
+import { BASE_URL } from '../assets/url';
 
 const Student = () => {
 
@@ -16,7 +17,7 @@ const Student = () => {
   
   const getUser = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/verify/'+cookies.get('token'))
+      const res = await axios.get( BASE_URL + '/verify/'+cookies.get('token'))
       console.log(res);
       setStudent(res.data?.result)
       setMarks(student?.marks)

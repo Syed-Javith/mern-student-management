@@ -6,6 +6,7 @@ import Typewriter from "typewriter-effect";
 import '../css/Login.css'
 import { FaUserAlt } from 'react-icons/fa';
 import axios from 'axios';
+import { BASE_URL } from '../assets/url';
 const Login = () => {
 
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ const Login = () => {
 
   const getUser = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/verify/'+cookies.get('token'))
+      const res = await axios.get( BASE_URL + '/verify/'+cookies.get('token'))
       console.log(res);
       if(!res.data?.result.isAdmin)
       navigate('/student');

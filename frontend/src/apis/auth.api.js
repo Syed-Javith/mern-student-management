@@ -1,5 +1,6 @@
 import axios from 'axios'
-const url = 'http://localhost:5000'
+import { BASE_URL } from '../assets/url';
+const url = BASE_URL
 
 export const loginUser = async (email, password) => {
     try {

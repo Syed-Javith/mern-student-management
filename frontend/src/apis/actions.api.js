@@ -1,8 +1,9 @@
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import { BASE_URL } from "../assets/url";
 
 const cookies = new Cookies()
-const url = 'http://localhost:5000';
+const url = BASE_URL;
 const token = cookies.get('token')
 const Headers = { headers : {
     'Authorization' : 'Bearer ' + token
