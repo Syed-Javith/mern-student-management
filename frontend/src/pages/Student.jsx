@@ -20,7 +20,7 @@ const Student = () => {
       const res = await axios.get( BASE_URL + '/verify/'+cookies.get('token'))
       console.log(res);
       setStudent(res.data?.result)
-      setMarks(student?.marks)
+      setMarks(res.data?.result?.marks)
     } catch (error) {
       console.log(error);
     }
@@ -29,9 +29,6 @@ const Student = () => {
   useEffect(()=>{
     getUser();
     if(student?.isAdmin) navigate('/admin')
-    // if(student === null || student === undefined || marks === undefined || marks === null){
-    //   navigate('/')
-    // } 
   },[])
 
   return (
